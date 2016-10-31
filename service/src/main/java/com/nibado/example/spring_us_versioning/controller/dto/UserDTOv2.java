@@ -4,7 +4,7 @@ import com.nibado.example.spring_us_versioning.versioning.Versioned;
 import lombok.Data;
 
 @Data
-public class UserDTO implements Versioned {
+public class UserDTOv2 implements Versioned {
     private final String firstName;
     private final String lastName;
 

@@ -24,7 +24,7 @@ public class UserService {
 
     @PostConstruct
     public void init() {
-        add(new User(new UUID(0, 0), "Jack", "Johnson"));
-        add(new User(new UUID(0, 1), "Jill", "Johnson"));
+        add(new User(new UUID(0, 0), "Jack", "Johnson", "jack@example.com"));
+        add(new User(new UUID(0, 1), "Jill", "Johnson", "jill@example.com"));
     }
 }

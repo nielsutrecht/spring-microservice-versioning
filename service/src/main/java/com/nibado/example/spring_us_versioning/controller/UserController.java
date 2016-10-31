@@ -28,14 +28,14 @@ public class UserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public UserDTO get(@PathVariable final UUID id) {
         User user = service.get(id).orElseThrow(() -> new RuntimeException("User not found"));
-        return new UserDTO(user.getFirstName(), user.getLastName());
+        return new UserDTO(user.getFirstName(), user.getLastName(), user.getEMail());
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public UserListDTO getAll() {
         List<UserDTO> users = service.getAll()
                 .stream()
-                .map(u -> new UserDTO(u.getFirstName(), u.getLastName()))
+                .map(u -> new UserDTO(u.getFirstName(), u.getLastName(), u.getEMail()))
                 .collect(toList());
 
         return new UserListDTO(users);

@@ -12,6 +12,7 @@ import static java.lang.Integer.parseInt;
 
 @ControllerAdvice
 public class AdapterAdvice implements ResponseBodyAdvice<Versioned> {
+    private static final String PROTOCOL_VERSION_HEADER = "X-Protocol-Version";
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
@@ -27,10 +28,10 @@ public class AdapterAdvice implements ResponseBodyAdvice<Versioned> {
             ServerHttpRequest serverHttpRequest,
             ServerHttpResponse serverHttpResponse) {
 
-        String version = serverHttpRequest.getHeaders().getFirst("X-Protocol-Version");
+        String version = serverHttpRequest.getHeaders().getFirst(PROTOCOL_VERSION_HEADER);
 
         if(version == null) {
-            throw new RuntimeException("Missing 'X-Protocol-Version' header.");
+            throw new RuntimeException(String.format("Missing '%s' header.", PROTOCOL_VERSION_HEADER));
         }
 
         return versioned.toVersion(parseInt(version));
