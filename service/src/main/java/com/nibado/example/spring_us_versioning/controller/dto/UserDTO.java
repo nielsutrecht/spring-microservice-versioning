@@ -11,11 +11,10 @@ public class UserDTO implements Versioned {
 
     @Override
     public Versioned toVersion(int version) {
-        if(version <= 2) {
+        if (version <= 2) {
             return new UserDTOv2(firstName, lastName)
                     .toVersion(version);
-        }
-        else {
+        } else {
             return this;
         }
     }

@@ -16,7 +16,13 @@ public class AdapterAdvice implements ResponseBodyAdvice<Versioned> {
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        return isVersioned(methodParameter);
+        for(Class<?> interf : ((Class<?>)methodParameter.getGenericParameterType()).getInterfaces()) {
+            if(interf.equals(Versioned.class)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
@@ -35,15 +41,5 @@ public class AdapterAdvice implements ResponseBodyAdvice<Versioned> {
         }
 
         return versioned.toVersion(parseInt(version));
-    }
-
-    private boolean isVersioned(final MethodParameter methodParameter) {
-        for(Class<?> interf : ((Class<?>)methodParameter.getGenericParameterType()).getInterfaces()) {
-            if(interf.equals(Versioned.class)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

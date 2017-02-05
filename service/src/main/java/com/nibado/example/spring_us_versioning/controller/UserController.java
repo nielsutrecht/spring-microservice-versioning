@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 
@@ -26,7 +25,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public UserDTO get(@PathVariable final UUID id) {
+    public UserDTO get(@PathVariable final int id) {
         User user = service.get(id).orElseThrow(() -> new RuntimeException("User not found"));
         return new UserDTO(user.getFirstName(), user.getLastName(), user.getEMail());
     }

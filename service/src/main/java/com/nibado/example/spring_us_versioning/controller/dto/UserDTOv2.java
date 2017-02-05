@@ -10,10 +10,9 @@ public class UserDTOv2 implements Versioned {
 
     @Override
     public Versioned toVersion(int version) {
-        if(version <= 1) {
+        if (version <= 1) {
             return new UserDTOv1(firstName + " " + lastName);
-        }
-        else {
+        } else {
             return this;
         }
     }

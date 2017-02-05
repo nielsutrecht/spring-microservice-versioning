@@ -8,13 +8,13 @@ import java.util.*;
 
 @Service
 public class UserService {
-    private Map<UUID, User> users = new HashMap<>();
+    private Map<Integer, User> users = new HashMap<>();
 
     public void add(final User user) {
         users.put(user.getId(), user);
     }
 
-    public Optional<User> get(final UUID id) {
+    public Optional<User> get(final int id) {
         return Optional.ofNullable(users.get(id));
     }
 
@@ -24,7 +24,7 @@ public class UserService {
 
     @PostConstruct
     public void init() {
-        add(new User(new UUID(0, 0), "Jack", "Johnson", "jack@example.com"));
-        add(new User(new UUID(0, 1), "Jill", "Johnson", "jill@example.com"));
+        add(new User(0, "Jack", "Johnson", "jack@example.com"));
+        add(new User(0, "Jill", "Johnson", "jill@example.com"));
     }
 }
